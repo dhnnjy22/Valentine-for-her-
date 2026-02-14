@@ -21,7 +21,6 @@ position:fixed;
 width:100%;
 height:100%;
 background:black;
-color:white;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -30,19 +29,24 @@ z-index:9999;
 animation:fadeOut 3s ease 3s forwards;
 }
 
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
-
 #intro h1{
 font-size:40px;
 animation:fadeIn 3s;
 }
 
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
 /* typing animation */
 .typing{
 font-size:28px;
-margin-top:20px;
+margin-top:10px;
 border-right:3px solid white;
 white-space:nowrap;
 overflow:hidden;
@@ -67,7 +71,6 @@ border-radius:20px;
 box-shadow:0 0 25px pink;
 background:rgba(255,255,255,0.1);
 padding:10px;
-position:relative;
 }
 
 .slideshow img{
@@ -83,7 +86,7 @@ display:block;
 animation:fadeIn 1s;
 }
 
-/* buttons */
+/* main buttons */
 button{
 padding:15px 25px;
 font-size:18px;
@@ -101,6 +104,29 @@ background:pink;
 transform:scale(1.1);
 }
 
+/* romantic buttons */
+.romantic-btn{
+display:block;
+margin:12px auto;
+padding:14px 28px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+transition:0.3s;
+color:white;
+font-family:cursive;
+}
+
+.btn1{background:linear-gradient(45deg,#ff6a88,#ff99ac);}
+.btn2{background:linear-gradient(45deg,#ff9966,#ff5e62);}
+.btn3{background:linear-gradient(45deg,#c471f5,#fa71cd);}
+.btn4{background:linear-gradient(45deg,#ff758c,#ff7eb3);}
+
+.romantic-btn:hover{
+transform:scale(1.1);
+}
+
 /* popup */
 .popup{
 display:none;
@@ -114,7 +140,22 @@ padding:30px;
 border-radius:20px;
 font-size:22px;
 z-index:999;
-animation:fadeIn 1s;
+}
+
+/* quote popup */
+.quotePopup{
+display:none;
+position:fixed;
+top:60%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:#ff4b7d;
+padding:25px;
+border-radius:20px;
+font-size:20px;
+max-width:300px;
+z-index:1000;
 }
 
 /* floating hearts */
@@ -135,7 +176,6 @@ opacity:0;
 .petal{
 position:fixed;
 top:-50px;
-font-size:20px;
 animation:fall linear infinite;
 }
 
@@ -159,17 +199,15 @@ opacity:0;
 }
 }
 
-/* bottom love line */
-.bottomLove{
-margin-top:100px;
+/* bottom fixed love */
+.bottom-fixed{
+position:fixed;
+bottom:10px;
+width:100%;
+text-align:center;
 font-size:26px;
-font-weight:bold;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px white;}
-to{text-shadow:0 0 30px red;}
+font-family:cursive;
+text-shadow:0 0 15px red;
 }
 
 </style>
@@ -177,7 +215,7 @@ to{text-shadow:0 0 30px red;}
 
 <body>
 
-<!-- cinematic intro -->
+<!-- intro -->
 <div id="intro">
 <h1>Our Love Story ❤️</h1>
 </div>
@@ -191,13 +229,17 @@ to{text-shadow:0 0 30px red;}
 
 <div class="typing">I love you Ashna ❤️</div>
 
-<br>
-
 <button onclick="start()">Start Our Love Story ❤️</button>
 
-<br>
-
 <button onclick="showProposal()">My Proposal To You 💍</button>
+
+<button class="romantic-btn btn1" onclick="showQuote(1)">Why I Love You ❤️</button>
+
+<button class="romantic-btn btn2" onclick="showQuote(2)">What You Mean To Me 💖</button>
+
+<button class="romantic-btn btn3" onclick="showQuote(3)">My Heart Speaks 💓</button>
+
+<button class="romantic-btn btn4" onclick="showQuote(4)">My Forever Promise 💍</button>
 
 <div class="slideshow">
 
@@ -228,13 +270,16 @@ I promise to love you forever Ashna ❤️
 
 </div>
 
-<div class="bottomLove">
+<!-- quote popup -->
+<div id="quotePopup" class="quotePopup"></div>
+
+<div class="bottom-fixed">
 Ashna, I love you so much ❤️
 </div>
 
 <script>
 
-/* start music */
+/* music */
 function start(){
 document.getElementById("music").play();
 }
@@ -261,6 +306,35 @@ document.getElementById("proposalPopup").style.display="none";
 document.getElementById("acceptedPopup").style.display="block";
 
 heartExplosion();
+
+}
+
+/* quotes */
+function showQuote(num){
+
+let text="";
+
+if(num==1)
+text="Ashna, loving you is the best decision of my life ❤️";
+
+if(num==2)
+text="You are my peace, my happiness, and my forever 💖";
+
+if(num==3)
+text="My heart belongs only to you Ashna 💓";
+
+if(num==4)
+text="I promise to stand beside you forever 💍";
+
+let popup=document.getElementById("quotePopup");
+
+popup.innerHTML=text;
+
+popup.style.display="block";
+
+setTimeout(()=>{
+popup.style.display="none";
+},4000);
 
 }
 
