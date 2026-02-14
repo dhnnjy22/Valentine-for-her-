@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Valentine's Day ❤️</title>
+<style>
+body {
+  background: linear-gradient(to right, #ff758c, #ff7eb3);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  color: white;
+  padding-top: 100px;
+}
+
+.container {
+  background: rgba(0,0,0,0.3);
+  padding: 40px;
+  border-radius: 20px;
+  width: 80%;
+  margin: auto;
+}
+
+button {
+  background: white;
+  color: #ff4b7d;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background: pink;
+}
+
+.hidden {
+  display: none;
+  margin-top: 20px;
+  font-size: 22px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Happy Valentine's Day ❤️</h1>
+
+<h2>Ashna dhananjay, this is for you</h2>
+
+<p>
+Distance may keep us apart physically,<br>
+but nothing can separate you from my heart.
+</p>
+
+<p>
+You are not just someone I love,<br>
+you are someone who changed my world.
+</p>
+
+<button onclick="showMessage()">Click here</button>
+
+<div id="message" class="hidden">
+I love you more than yesterday,<br>
+and less than tomorrow ❤️
+</div>
+
+</div>
+
+<script>
+function showMessage() {
+  document.getElementById("message").style.display = "block";
+}
+</script>
+
+</body>
+</html>
