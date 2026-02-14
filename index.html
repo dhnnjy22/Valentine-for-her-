@@ -8,79 +8,90 @@
 
 body{
 margin:0;
-padding:0;
 font-family:'Segoe UI',sans-serif;
 background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
 color:white;
 text-align:center;
 overflow-x:hidden;
-min-height:100vh;
-display:flex;
-flex-direction:column;
 }
 
-/* container */
-.container{
-max-width:500px;
-margin:auto;
-padding:20px;
-flex:1;
-}
-
-/* glowing title */
-h1{
-font-size:30px;
-animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{text-shadow:0 0 10px white;}
-to{text-shadow:0 0 30px red,0 0 50px pink;}
-}
-
-/* typing text */
-.typing{
-font-size:24px;
-margin-top:15px;
-min-height:30px;
-}
-
-/* slideshow FIXED */
-.slideshow{
-width:100%;
-max-width:350px;
-height:450px;
-margin:20px auto;
-position:relative;
-border-radius:20px;
-overflow:hidden;
-box-shadow:0 0 25px pink;
-background:rgba(255,255,255,0.1);
-}
-
-/* images fully visible */
-.slideshow img{
+/* cinematic intro */
+#intro{
+position:fixed;
 width:100%;
 height:100%;
-object-fit:contain;
-position:absolute;
-opacity:0;
-transition:1s;
+background:black;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+animation:fadeOut 3s ease 3s forwards;
+}
+
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
+}
+
+#intro h1{
+font-size:40px;
+animation:fadeIn 3s;
+}
+
+/* typing animation */
+.typing{
+font-size:28px;
+margin-top:20px;
+border-right:3px solid white;
+white-space:nowrap;
+overflow:hidden;
+width:0;
+animation:typing 4s steps(30,end) forwards,blink 1s infinite;
+}
+
+@keyframes typing{
+to{width:100%;}
+}
+
+@keyframes blink{
+50%{border-color:transparent;}
+}
+
+/* slideshow */
+.slideshow{
+width:90%;
+max-width:350px;
+margin:30px auto;
+border-radius:20px;
+box-shadow:0 0 25px pink;
+background:rgba(255,255,255,0.1);
+padding:10px;
+position:relative;
+}
+
+.slideshow img{
+width:100%;
+height:auto;
+max-height:500px;
+border-radius:20px;
+display:none;
 }
 
 .slideshow img.active{
-opacity:1;
+display:block;
+animation:fadeIn 1s;
 }
 
 /* buttons */
 button{
-padding:12px 20px;
-font-size:16px;
+padding:15px 25px;
+font-size:18px;
 border:none;
-border-radius:25px;
+border-radius:30px;
 background:white;
 color:#ff4b7d;
-margin:8px;
+margin:10px;
 cursor:pointer;
 transition:0.3s;
 }
@@ -90,20 +101,7 @@ background:pink;
 transform:scale(1.1);
 }
 
-/* hidden messages */
-.hidden{
-display:none;
-margin-top:15px;
-font-size:18px;
-animation:fadeIn 1.5s;
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-/* proposal popup */
+/* popup */
 .popup{
 display:none;
 position:fixed;
@@ -115,61 +113,91 @@ color:#ff4b7d;
 padding:30px;
 border-radius:20px;
 font-size:22px;
-box-shadow:0 0 30px pink;
+z-index:999;
 animation:fadeIn 1s;
-z-index:1000;
 }
 
 /* floating hearts */
 .heart{
 position:fixed;
 bottom:-10px;
+animation:floatUp 6s linear infinite;
+}
+
+@keyframes floatUp{
+to{
+transform:translateY(-100vh);
+opacity:0;
+}
+}
+
+/* rose petals */
+.petal{
+position:fixed;
+top:-50px;
 font-size:20px;
-animation:float 6s infinite;
+animation:fall linear infinite;
 }
 
-@keyframes float{
-0%{transform:translateY(0);opacity:1;}
-100%{transform:translateY(-100vh);opacity:0;}
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
 }
 
-/* bottom message TRUE bottom */
-.footer{
-padding:15px;
-font-size:22px;
+/* heart explosion */
+.explosion{
+position:fixed;
+font-size:30px;
+animation:explode 1s forwards;
+}
+
+@keyframes explode{
+to{
+transform:translate(var(--x),var(--y));
+opacity:0;
+}
+}
+
+/* bottom love line */
+.bottomLove{
+margin-top:100px;
+font-size:26px;
 font-weight:bold;
 animation:glow 2s infinite alternate;
 }
 
-</style>
+@keyframes glow{
+from{text-shadow:0 0 10px white;}
+to{text-shadow:0 0 30px red;}
+}
 
+</style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
+<!-- cinematic intro -->
+<div id="intro">
+<h1>Our Love Story ❤️</h1>
+</div>
+
+<!-- music -->
+<audio id="music" loop>
 <source src="Until I Found You - Stephen Sanchez (AI Filtered Instrumental) (1).mp3">
 </audio>
 
-<div class="container">
-
 <h1>For My Love Ashna Dhananjay ❤️</h1>
 
-<button onclick="startExperience()">Start Our Love Story ❤️</button>
+<div class="typing">I love you Ashna ❤️</div>
 
-<div class="typing" id="typingText"></div>
+<br>
 
-<div id="mainMessage" class="hidden">
+<button onclick="start()">Start Our Love Story ❤️</button>
 
-Ashna,<br><br>
+<br>
 
-You are the most beautiful part of my life.<br>
-You are my peace, my happiness,<br>
-and my forever. ❤️
-
-</div>
-
-<!-- slideshow -->
+<button onclick="showProposal()">My Proposal To You 💍</button>
 
 <div class="slideshow">
 
@@ -180,150 +208,115 @@ and my forever. ❤️
 
 </div>
 
-<!-- romantic buttons -->
-
-<button onclick="showQuote1()">Why I Love You ❤️</button>
-
-<div id="quote1" class="hidden">
-I love you because you make my world brighter every single day.
-</div>
-
-<button onclick="showQuote2()">What You Mean To Me 💕</button>
-
-<div id="quote2" class="hidden">
-You are not just my love,<br>
-you are my heart, my soul, my everything.
-</div>
-
-<button onclick="showQuote3()">My Forever Promise 💍</button>
-
-<div id="quote3" class="hidden">
-I promise to love you,<br>
-protect you,<br>
-and stay with you forever.
-</div>
-
-<button onclick="showProposal()">My Proposal To You 💍</button>
-
-</div>
-
 <!-- proposal popup -->
-
 <div id="proposalPopup" class="popup">
+
 Ashna,<br><br>
-Will you stay with me forever? ❤️
+
+Will you stay with me forever? ❤️<br><br>
+
+<button onclick="acceptProposal()">YES ❤️</button>
+
 </div>
 
-<!-- true bottom -->
+<!-- accepted popup -->
+<div id="acceptedPopup" class="popup">
 
-<div class="footer">
+You made me the happiest person alive ❤️<br><br>
+
+I promise to love you forever Ashna ❤️
+
+</div>
+
+<div class="bottomLove">
 Ashna, I love you so much ❤️
 </div>
 
 <script>
 
-/* start experience */
-
-function startExperience(){
-
-document.getElementById("bgMusic").play();
-
-document.getElementById("mainMessage").style.display="block";
-
-startTyping();
-
-}
-
-/* typing animation */
-
-let text="I love you Ashna ❤️";
-let i=0;
-
-function startTyping(){
-
-let typing=document.getElementById("typingText");
-
-typing.innerHTML="";
-
-i=0;
-
-let interval=setInterval(function(){
-
-typing.innerHTML+=text.charAt(i);
-
-i++;
-
-if(i>=text.length){
-
-clearInterval(interval);
-
-}
-
-},100);
-
+/* start music */
+function start(){
+document.getElementById("music").play();
 }
 
 /* slideshow */
-
-let slideIndex=0;
-
+let index=0;
 let slides=document.querySelectorAll(".slideshow img");
 
-setInterval(function(){
-
-slides[slideIndex].classList.remove("active");
-
-slideIndex=(slideIndex+1)%slides.length;
-
-slides[slideIndex].classList.add("active");
-
+setInterval(()=>{
+slides[index].classList.remove("active");
+index=(index+1)%slides.length;
+slides[index].classList.add("active");
 },3000);
 
-/* quotes */
-
-function showQuote1(){
-document.getElementById("quote1").style.display="block";
-}
-
-function showQuote2(){
-document.getElementById("quote2").style.display="block";
-}
-
-function showQuote3(){
-document.getElementById("quote3").style.display="block";
-}
-
 /* proposal */
-
 function showProposal(){
-
 document.getElementById("proposalPopup").style.display="block";
+}
+
+/* accept proposal */
+function acceptProposal(){
+
+document.getElementById("proposalPopup").style.display="none";
+document.getElementById("acceptedPopup").style.display="block";
+
+heartExplosion();
 
 }
 
 /* floating hearts */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.innerHTML="❤️";
+heart.className="heart";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
+document.body.appendChild(heart);
 
-setInterval(function(){
+setTimeout(()=>heart.remove(),6000);
+
+},300);
+
+/* rose petals */
+setInterval(()=>{
+let petal=document.createElement("div");
+petal.innerHTML="🌹";
+petal.className="petal";
+petal.style.left=Math.random()*100+"vw";
+petal.style.animationDuration=(Math.random()*3+5)+"s";
+document.body.appendChild(petal);
+
+setTimeout(()=>petal.remove(),8000);
+
+},500);
+
+/* heart explosion */
+function heartExplosion(){
+
+for(let i=0;i<30;i++){
 
 let heart=document.createElement("div");
 
 heart.innerHTML="❤️";
 
-heart.className="heart";
+heart.className="explosion";
 
-heart.style.left=Math.random()*100+"vw";
+heart.style.left="50%";
+heart.style.top="50%";
 
-heart.style.fontSize=(Math.random()*20+10)+"px";
+let x=(Math.random()-0.5)*400+"px";
+let y=(Math.random()-0.5)*400+"px";
+
+heart.style.setProperty("--x",x);
+heart.style.setProperty("--y",y);
 
 document.body.appendChild(heart);
 
-setTimeout(function(){
+setTimeout(()=>heart.remove(),1000);
 
-heart.remove();
+}
 
-},6000);
-
-},300);
+}
 
 </script>
 
