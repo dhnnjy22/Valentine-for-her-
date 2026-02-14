@@ -2,45 +2,109 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Valentine's Day ❤️</title>
+<title>For Ashna Dhananjay ❤️</title>
+
 <style>
+
 body {
-  background: linear-gradient(to right, #ff758c, #ff7eb3);
-  font-family: Arial, sans-serif;
-  text-align: center;
-  color: white;
-  padding-top: 100px;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffb199);
+    font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: float 6s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
 }
 
 .container {
-  background: rgba(0,0,0,0.3);
-  padding: 40px;
-  border-radius: 20px;
-  width: 80%;
-  margin: auto;
+    margin-top: 80px;
+    padding: 30px;
+}
+
+h1 {
+    font-size: 42px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px white;
+    }
+    to {
+        text-shadow: 0 0 25px pink, 0 0 35px red;
+    }
+}
+
+h2 {
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+.message-box {
+    margin-top: 30px;
+    background: rgba(0,0,0,0.3);
+    padding: 25px;
+    border-radius: 20px;
+    font-size: 20px;
+    line-height: 1.6;
 }
 
 button {
-  background: white;
-  color: #ff4b7d;
-  border: none;
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 30px;
-  cursor: pointer;
-  margin-top: 20px;
+    margin-top: 30px;
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: #ff4b7d;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
-  background: pink;
+    background: pink;
+    transform: scale(1.1);
 }
 
 .hidden {
-  display: none;
-  margin-top: 20px;
-  font-size: 22px;
+    display: none;
+    margin-top: 25px;
+    font-size: 24px;
+    animation: fadeIn 2s;
 }
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.footer {
+    margin-top: 60px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
 </style>
+
 </head>
 
 <body>
@@ -49,31 +113,72 @@ button:hover {
 
 <h1>Happy Valentine's Day ❤️</h1>
 
-<h2>Ashna dhananjay, this is for you</h2>
+<h2>My Love, Ashna Dhananjay</h2>
 
-<p>
-Distance may keep us apart physically,<br>
-but nothing can separate you from my heart.
-</p>
+<div class="message-box">
 
-<p>
-You are not just someone I love,<br>
-you are someone who changed my world.
-</p>
+Ashna,  
 
-<button onclick="showMessage()">Click here</button>
+From the moment you came into my life, everything changed.  
+You brought happiness where there was silence,  
+light where there was darkness,  
+and love where there was emptiness.  
 
-<div id="message" class="hidden">
-I love you more than yesterday,<br>
-and less than tomorrow ❤️
+Distance may separate our bodies,  
+but nothing can separate our hearts.  
+
+You are not just someone I love...  
+You are someone I need, someone I cherish, someone I see in my future.  
+
+Every day, I feel lucky to have you.  
+Every moment, I feel grateful for your existence.  
+
+No matter how far we are today,  
+one day I promise we will stand together,  
+not separated by distance, but united forever.  
+
+</div>
+
+<button onclick="showLove()">Click here, Ashna ❤️</button>
+
+<div id="loveMessage" class="hidden">
+Ashna Dhananjay,  
+
+You are my happiness,  
+my peace,  
+my heart,  
+and my forever.  
+
+I love you more than words can ever explain ❤️
+</div>
+
+<div class="footer">
+Made with ❤️ only for you, Ashna
 </div>
 
 </div>
 
 <script>
-function showMessage() {
-  document.getElementById("message").style.display = "block";
+
+function showLove() {
+    document.getElementById("loveMessage").style.display = "block";
 }
+
+/* Create floating hearts */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+
+}, 300);
+
 </script>
 
 </body>
