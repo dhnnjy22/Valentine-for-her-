@@ -8,6 +8,7 @@
 
 body{
 margin:0;
+padding:0;
 font-family:'Segoe UI',sans-serif;
 background:linear-gradient(135deg,#ff758c,#ff7eb3,#ffb199);
 color:white;
@@ -15,31 +16,43 @@ text-align:center;
 overflow-x:hidden;
 }
 
+/* main container */
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+}
+
 /* glowing title */
 h1{
-font-size:45px;
+font-size:32px;
 animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
 from{text-shadow:0 0 10px white;}
-to{text-shadow:0 0 30px red,0 0 50px pink;}
+to{text-shadow:0 0 25px red,0 0 40px pink;}
 }
 
-.container{
-padding:20px;
+/* typing animation */
+.typing{
+font-size:26px;
+margin-top:20px;
+height:35px;
 }
 
-/* slideshow */
+/* slideshow container */
 .slideshow{
-width:300px;
+width:100%;
 height:400px;
-margin:auto;
-overflow:hidden;
+margin-top:20px;
+position:relative;
 border-radius:20px;
+overflow:hidden;
 box-shadow:0 0 20px pink;
 }
 
+/* slideshow images */
 .slideshow img{
 width:100%;
 height:100%;
@@ -55,8 +68,8 @@ opacity:1;
 
 /* buttons */
 button{
-padding:15px 25px;
-font-size:18px;
+padding:12px 22px;
+font-size:16px;
 border:none;
 border-radius:25px;
 background:white;
@@ -69,6 +82,36 @@ transition:0.3s;
 button:hover{
 background:pink;
 transform:scale(1.1);
+}
+
+/* message */
+.hidden{
+display:none;
+margin-top:20px;
+font-size:18px;
+line-height:1.6;
+animation:fadeIn 2s;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* proposal popup */
+.popup{
+display:none;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
+color:#ff4b7d;
+padding:30px;
+border-radius:20px;
+font-size:24px;
+box-shadow:0 0 30px pink;
+animation:fadeIn 1s;
 }
 
 /* floating hearts */
@@ -84,58 +127,45 @@ animation:float 6s infinite;
 100%{transform:translateY(-100vh);opacity:0;}
 }
 
-/* hidden message */
-.hidden{
-display:none;
+/* bottom message */
+.bottom{
+margin-top:40px;
 font-size:22px;
-margin-top:20px;
-animation:fadeIn 2s;
-}
-
-@keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
-}
-
-/* final message */
-.final{
-margin-top:50px;
-font-size:20px;
-line-height:1.6;
-opacity:0.9;
+font-weight:bold;
+animation:glow 2s infinite alternate;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <audio id="bgMusic" loop>
-<source src="Until I Found You - Stephen Sanchez (AI Filtered Instrumental) (1).mp3" type="audio/mpeg">
+<source src="Until I Found You - Stephen Sanchez (AI Filtered Instrumental) (1).mp3">
 </audio>
 
 <div class="container">
 
 <h1>For My Love Ashna Dhananjay ❤️</h1>
 
-<h2>You are my heart, my peace, my forever</h2>
-
 <button onclick="startExperience()">Start Our Love Story ❤️</button>
 
+<div class="typing" id="typingText"></div>
+
 <div id="message" class="hidden">
+
 Ashna,<br><br>
+
 From the moment you entered my life,<br>
 everything became brighter.<br><br>
 
-You are not just someone I love,<br>
-you are someone I never want to lose.<br><br>
-
 You are my happiness,<br>
-my safe place,<br>
+my peace,<br>
+my heart,<br>
 my forever. ❤️
-</div>
 
-<br><br>
+</div>
 
 <div class="slideshow">
 
@@ -146,20 +176,15 @@ my forever. ❤️
 
 </div>
 
-<div class="final">
+<button onclick="showProposal()">My Proposal To You 💍</button>
 
+<div id="proposalPopup" class="popup">
 Ashna,<br><br>
+Will you stay with me forever? ❤️
+</div>
 
-No matter how far life takes us,<br>
-my heart will always find its way back to you.<br><br>
-
-In every lifetime,<br>
-in every universe,<br>
-I would still choose you.<br><br>
-
-You are not just my love.<br>
-You are my destiny. ❤️
-
+<div class="bottom">
+Ashna, I love you so much ❤️
 </div>
 
 </div>
@@ -167,27 +192,73 @@ You are my destiny. ❤️
 <script>
 
 /* start experience */
+
 function startExperience(){
 
 document.getElementById("bgMusic").play();
 
 document.getElementById("message").style.display="block";
 
+startTyping();
+
+}
+
+/* typing animation */
+
+let text="I love you Ashna ❤️";
+let i=0;
+
+function startTyping(){
+
+let typing=document.getElementById("typingText");
+
+let interval=setInterval(function(){
+
+typing.innerHTML+=text.charAt(i);
+
+i++;
+
+if(i>=text.length){
+
+clearInterval(interval);
+
+}
+
+},100);
+
 }
 
 /* slideshow */
-let index=0;
+
+let slideIndex=0;
+
 let slides=document.querySelectorAll(".slideshow img");
 
-setInterval(()=>{
-slides[index].classList.remove("active");
-index=(index+1)%slides.length;
-slides[index].classList.add("active");
+setInterval(function(){
+
+slides[slideIndex].classList.remove("active");
+
+slideIndex=(slideIndex+1)%slides.length;
+
+slides[slideIndex].classList.add("active");
+
 },3000);
+
+/* proposal */
+
+function showProposal(){
+
+let popup=document.getElementById("proposalPopup");
+
+popup.style.display="block";
+
+document.getElementById("bgMusic").play();
+
+}
 
 /* floating hearts */
 
-setInterval(()=>{
+setInterval(function(){
 
 let heart=document.createElement("div");
 
@@ -201,7 +272,11 @@ heart.style.fontSize=(Math.random()*20+10)+"px";
 
 document.body.appendChild(heart);
 
-setTimeout(()=>heart.remove(),6000);
+setTimeout(function(){
+
+heart.remove();
+
+},6000);
 
 },300);
 
